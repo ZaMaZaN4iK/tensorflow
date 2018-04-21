@@ -16,6 +16,7 @@ limitations under the License.
 #ifndef TENSORFLOW_LIB_MATH_MATH_UTIL_H_
 #define TENSORFLOW_LIB_MATH_MATH_UTIL_H_
 
+#include <cmath>
 #include <type_traits>
 
 #include "tensorflow/core/platform/logging.h"
@@ -151,11 +152,7 @@ IntegralType MathUtil::GCD(IntegralType a, IntegralType b) {
 template <typename T>
 T MathUtil::IPow(T base, int exp) {
   DCHECK_GE(exp, 0);
-  for (T result(1);; base *= base) {
-    if ((exp & 1) != 0) result *= base;
-    exp >>= 1;
-    if (exp == 0) return result;
-  }
+  return std::pow(base, exp);
 }
 
 }  // namespace tensorflow
