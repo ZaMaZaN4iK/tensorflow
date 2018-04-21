@@ -25,10 +25,10 @@ limitations under the License.
 namespace tensorflow {
 
 static bool IsAlpha(char c) {
-  return isalpha(c);
+  return std::isalpha(c);
 }
 
-static bool IsAlphaNum(char c) { return IsAlpha(c) || isdigit(c); }
+static bool IsAlphaNum(char c) { return IsAlpha(c) || std::isdigit(c); }
 
 // Returns true iff "in" is a valid job name.
 static bool IsJobName(StringPiece in) {
