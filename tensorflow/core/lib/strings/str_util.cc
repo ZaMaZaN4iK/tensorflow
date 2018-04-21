@@ -74,7 +74,7 @@ namespace {  // Private helpers for CUnescape().
 inline bool is_octal_digit(unsigned char c) { return c >= '0' && c <= '7'; }
 
 inline bool ascii_isxdigit(unsigned char c) {
-  return isxdigit(static_cast<int>(c));
+  return std::isxdigit(static_cast<int>(c));
 }
 
 inline int hex_digit_to_int(char c) {
