@@ -74,8 +74,7 @@ namespace {  // Private helpers for CUnescape().
 inline bool is_octal_digit(unsigned char c) { return c >= '0' && c <= '7'; }
 
 inline bool ascii_isxdigit(unsigned char c) {
-  return (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') ||
-         (c >= 'A' && c <= 'F');
+  return std::isxdigit(static_cast<int>(c));
 }
 
 inline int hex_digit_to_int(char c) {
@@ -251,18 +250,14 @@ void StripTrailingWhitespace(string* s) {
 // Return lower-cased version of s.
 string Lowercase(StringPiece s) {
   string result(s.data(), s.size());
-  for (char& c : result) {
-    c = tolower(c);
-  }
+  std::transform(result.begin(), result.end(), result.begin(), ::tolower);
   return result;
 }
 
 // Return upper-cased version of s.
 string Uppercase(StringPiece s) {
   string result(s.data(), s.size());
-  for (char& c : result) {
-    c = toupper(c);
-  }
+  std::transform(result.begin(), result.end(), result.begin(), ::toupper);
   return result;
 }
 
