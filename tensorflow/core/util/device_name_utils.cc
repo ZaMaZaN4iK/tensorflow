@@ -20,13 +20,15 @@ limitations under the License.
 #include "tensorflow/core/lib/strings/strcat.h"
 #include "tensorflow/core/platform/logging.h"
 
+#include <cctype>
+
 namespace tensorflow {
 
 static bool IsAlpha(char c) {
-  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+  return std::isalpha(c);
 }
 
-static bool IsAlphaNum(char c) { return IsAlpha(c) || (c >= '0' && c <= '9'); }
+static bool IsAlphaNum(char c) { return IsAlpha(c) || std::isdigit(c); }
 
 // Returns true iff "in" is a valid job name.
 static bool IsJobName(StringPiece in) {
